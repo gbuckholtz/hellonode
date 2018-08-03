@@ -31,6 +31,8 @@ node {
         docker.withRegistry('http://localhost:8089', 'Nexus-Docker-repo') {
             app.push("${env.BUILD_NUMBER}")
             app.push("latest")
+            app.image("image prune -a -f")
         }
+        
     }
 }
