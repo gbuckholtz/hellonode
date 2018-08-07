@@ -30,8 +30,10 @@ node {
          * Pushing multiple tags is cheap, as all the layers are reused. */
         docker.withRegistry('http://localhost:8089', 'Nexus-Docker-repo') {
             app.push("${env.BUILD_NUMBER}")
-            app.image("prune -a -f")
-        }
-        
+        }    
     }
+    stage('Dangling Images') {
+      sh 'docker images -q -f dangling=true | xargs --no-run-if-empty docker rmi'
+    }
+    
 }
