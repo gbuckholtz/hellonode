@@ -33,7 +33,7 @@ node {
         }    
     }
     stage('Dangling Images') {
-      sh 'docker images -q -f dangling=true | xargs --no-run-if-empty docker rmi'
+      sh 'docker image prune -a -f'
     }
     
 }
